@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29 Mayıs Kardeşlik İftarı | Bereket Sofrası</title>
+    <!-- Fontlar -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- İkonlar (FontAwesome 6.4.0) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Zengin ve Dikkat Çekici Renk Paleti */
+            --primary: #064e3b; /* Derin Zümrüt Yeşili */
+            --accent: #d4af37;  /* Altın Sarısı / Gold */
+            --accent-dark: #b8912d;
+            --bg-light: #fdfcf7; /* Krem Arkaplan */
+            --text-dark: #1a1a1a;
+            --text-gray: #4a4a4a;
+            --white: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg-light); 
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .arabic { font-family: 'Amiri', serif; }
+
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .header-wrap { height: 80px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--primary); }
+        .logo i { font-size: 2.2rem; color: var(--accent); }
+        .logo-text h1 { font-size: 1.5rem; line-height: 1; font-weight: 700; margin-bottom: 2px; }
+        .logo-text span { font-size: 0.75rem; color: var(--text-gray); letter-spacing: 1px; text-transform: uppercase; }
+
+        .nav-menu { display: flex; gap: 10px; }
+        .nav-link { 
+            text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.9rem;
+            padding: 8px 16px; border-radius: 50px; transition: var(--transition);
+        }
+        .nav-link:hover { background: var(--primary); color: var(--white); }
+
+        .mobile-btn { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            background: linear-gradient(rgba(253, 252, 247, 0.9), rgba(253, 252, 247, 0.9)), 
+                        url('https://images.unsplash.com/photo-1542662565-7e4b66bae529?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .hero h2 { font-size: clamp(2.5rem, 8vw, 4.5rem); color: var(--primary); margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px; color: var(--text-gray); }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 40px; border-radius: 50px; text-decoration: none;
+            font-weight: 700; transition: var(--transition); cursor: pointer; border: none;
+        }
+        .btn-gold { background: var(--accent); color: var(--white); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
+        .btn-gold:hover { background: var(--accent-dark); transform: translateY(-3px); }
+
+        /* --- Verse Section --- */
+        .section-title { font-size: 2.5rem; color: var(--primary); margin-bottom: 40px; text-align: center; position: relative; }
+        .section-title::after { content: '◈'; display: block; font-size: 1rem; color: var(--accent); margin-top: 10px; }
+
+        .verse-box {
+            background: var(--white); padding: 50px; border-radius: 20px;
+            border: 1px solid #eee; border-bottom: 5px solid var(--accent);
+            text-align: center; max-width: 900px; margin: 0 auto;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+        }
+        .arabic { font-size: 2.2rem; color: var(--primary); margin-bottom: 25px; line-height: 1.8; }
+        .translation { font-style: italic; font-size: 1.15rem; color: var(--text-gray); margin-bottom: 15px; }
+        .reference { font-weight: 700; color: var(--accent); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; }
+
+        /* --- Gallery Slider --- */
+        .gallery-wrapper { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); height: 500px; }
+        .gallery-track { display: flex; transition: transform 0.8s ease-in-out; height: 100%; }
+        .gallery-slide { min-width: 100%; position: relative; }
+        .gallery-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 40px; background: linear-gradient(transparent, rgba(6, 78, 59, 0.9));
+            color: var(--white); text-align: left;
+        }
+
+        /* --- Raffle Card --- */
+        .raffle-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+            background: var(--white); padding: 40px; border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05); border: 1px solid #eee;
+        }
+        .raffle-info { text-align: left; }
+        .ig-highlight {
+            background: #fff5f5; border-radius: 15px; padding: 25px;
+            border-left: 5px solid #E1306C; margin: 20px 0;
+        }
+        .ig-highlight a { color: #E1306C; text-decoration: none; font-weight: 700; font-size: 1.2rem; }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
+        .form-control {
+            width: 100%; padding: 15px 20px; border-radius: 12px;
+            border: 2px solid #eee; font-family: inherit; transition: var(--transition);
+        }
+        .form-control:focus { outline: none; border-color: var(--accent); background: #fffdf5; }
+
+        /* --- Contact Grid --- */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .contact-card {
+            background: var(--white); padding: 40px; border-radius: 20px;
+            text-align: center; transition: var(--transition); border: 1px solid #eee;
+            text-decoration: none; color: inherit;
+        }
+        .contact-card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        .contact-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+        .contact-card h3 { color: var(--primary); font-size: 1.5rem; margin-bottom: 10px; }
+
+        /* --- Footer --- */
+        footer { background: var(--primary); color: var(--white); padding: 80px 0 40px; text-align: center; }
+        .footer-logo { margin-bottom: 30px; }
+        .footer-logo h2 { font-size: 2.2rem; }
+        .social-icons { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; }
+        .social-icon {
+            width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center; color: var(--white);
+            font-size: 1.2rem; text-decoration: none; transition: var(--transition);
+        }
+        .social-icon:hover { background: var(--accent); transform: scale(1.1); }
+
+        /* --- Custom Modal --- */
+        .modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+            display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
+        }
+        .modal-content {
+            background: var(--white); padding: 40px; border-radius: 20px;
+            max-width: 500px; width: 100%; text-align: center; position: relative;
+        }
+        .modal-content i { font-size: 4rem; color: #10b981; margin-bottom: 20px; }
+
+        /* --- Responsiveness --- */
+        @media (max-width: 992px) {
+            .raffle-container { grid-template-columns: 1fr; }
+            .gallery-wrapper { height: 350px; }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-btn { display: block; }
+            .nav-menu {
+                position: fixed; top: 80px; left: -100%; width: 100%; background: var(--white);
+                flex-direction: column; padding: 40px 20px; text-align: center;
+                transition: 0.5s; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .nav-menu.active { left: 0; }
+            .hero { padding-top: 150px; }
+            .section-title { font-size: 2rem; }
+            .arabic { font-size: 1.6rem; }
+        }
+
+        .section-padding { padding: 80px 0; }
+        .bg-pattern { background-image: radial-gradient(#d4af37 0.5px, transparent 0.5px); background-size: 20px 20px; background-opacity: 0.05; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-wrap">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-moon"></i>
+                <div class="logo-text">
+                    <h1>29 Mayıs İftarı</h1>
+                    <span>Kardeşlik ve Bereket</span>
+                </div>
+            </a>
+            <div class="mobile-btn" id="mobile-toggle">
+                <i class="fas fa-bars-staggered"></i>
+            </div>
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Giriş</a>
+                <a href="#verse" class="nav-link">Günün Ayeti</a>
+                <a href="#gallery" class="nav-link">Galeri</a>
+                <a href="#raffle" class="nav-link">Çekiliş</a>
+                <a href="#contact" class="nav-link">İletişim</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2 class="animate-fade">Gönül Sofrasında Birleşelim</h2>
+            <p>İstanbul 29 Mayıs Üniversitesi öğrencilerinin samimi ve bereketli iftar buluşmasına davetlisiniz. Kardeşlik bağlarımızı bu mübarek ayda daha da güçlendiriyoruz.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="#raffle" class="btn btn-gold">Çekilişe Katıl <i class="fas fa-gift"></i></a>
+                <a href="https://www.instagram.com/29mude_iftar?igsh=MTQwd2FzczIwN2hoag==" target="_blank" class="btn" style="border: 2px solid var(--primary); color: var(--primary);">Bizi Takip Et <i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verse -->
+    <section class="section-padding bg-pattern" id="verse">
+        <div class="container">
+            <h2 class="section-title">Günün Ayeti</h2>
+            <div class="verse-box">
+                <div class="arabic" id="v-arabic">يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ كَمَا كُتِبَ عَلَى ٱلَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ</div>
+                <div class="translation" id="v-trans">"Ey iman edenler! Oruç sizden öncekilere farz kılındığı gibi, Allah'a karşı gelmekten sakınasınız diye size de farz kılındı."</div>
+                <div class="reference" id="v-ref">Bakara Suresi, 183. Ayet</div>
+                <button class="btn" style="margin-top: 30px; font-size: 0.8rem; color: var(--accent);" onclick="changeVerse()">
+                    <i class="fas fa-sync-alt"></i> Farklı Bir Ayet
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section-padding" id="gallery" style="background: #fdfcf7;">
+        <div class="container text-center">
+            <h2 class="section-title">Soframızın Bereketi</h2>
+            <div class="gallery-wrapper">
+                <div class="gallery-track" id="gallery-track">
+                    <!-- Slides loaded by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Raffle -->
+    <section class="section-padding" id="raffle">
+        <div class="container text-center">
+            <h2 class="section-title">Instagram Çekilişi</h2>
+            <div class="raffle-container">
+                <div class="raffle-info">
+                    <h3>Hediye Kazanma Şansı!</h3>
+                    <p style="margin: 15px 0;">Bu yılki iftarımızda çeşitli sürpriz hediyeler dağıtıyoruz. Çekilişe katılmak için kuralları takip etmeyi unutmayın!</p>
+                    <div class="ig-highlight">
+                        <p>1. Hesabımızı Takip Et:</p>
+                        <a href="https://www.instagram.com/29mude_iftar?igsh=MTQwd2FzczIwN2hoag==" target="_blank">@29mude_iftar</a>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-gray);">2. Etkinlikten bir kareyi bizi etiketleyerek hikayende paylaş!</p>
+                    </div>
+                </div>
+                <form id="raffle-form">
+                    <div class="form-group">
+                        <label>Instagram Kullanıcı Adınız</label>
+                        <input type="text" class="form-control" placeholder="@kullaniciadi" required id="ig-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Adınız Soyadınız</label>
+                        <input type="text" class="form-control" placeholder="Ad Soyad" required>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                        <input type="checkbox" id="c" required>
+                        <label for="c" style="margin: 0; font-size: 0.8rem;">Hikaye paylaşımını yaptım.</label>
+                    </div>
+                    <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center;">Katılımı Onayla</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Cards -->
+    <section class="section-padding bg-pattern" id="contact">
+        <div class="container">
+            <h2 class="section-title">Bize Ulaşın</h2>
+            <div class="contact-grid">
+                <!-- Location Link -->
+                <a href="https://maps.google.com/maps/place//data=!4m2!3m1!1s0x14cac9c27feb2487:0xe3d6a3f3c0d3d672?entry=s&sa=X&ved=2ahUKEwjL6KPNxr2SAxUpSPEDHWlYBbwQ4kB6BAgnEAA&hl=en" target="_blank" class="contact-card">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <h3>Konum</h3>
+                    <p>Ümraniye Yerleşkesi, İstanbul</p>
+                    <span style="color: var(--accent); font-size: 0.8rem; font-weight: 700;">Haritalarda Aç →</span>
+                </a>
+                <!-- Instagram Link -->
+                <a href="https://www.instagram.com/29mude_iftar?igsh=MTQwd2FzczIwN2hoag==" target="_blank" class="contact-card">
+                    <i class="fa-brands fa-instagram"></i>
+                    <h3>Instagram</h3>
+                    <p>@29mude_iftar</p>
+                    <span style="color: var(--accent); font-size: 0.8rem; font-weight: 700;">Takip Et →</span>
+                </a>
+                <!-- Email -->
+                <div class="contact-card">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h3>E-Posta</h3>
+                    <p>29mayisiftar@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <h2>29 Mayıs Üniversitesi</h2>
+                <p>İftar Organizasyon Ekibi</p>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/29mude_iftar?igsh=MTQwd2FzczIwN2hoag==" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <!-- X (Twitter) Logo Updated -->
+                <a href="https://x.com/29mude_iftar?s=21" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+            <p style="font-size: 0.8rem; opacity: 0.6;">&copy; 2024 İstanbul 29 Mayıs Üniversitesi Kardeşlik İftarı</p>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle"></i>
+            <h2 style="color: var(--primary); margin-bottom: 10px;">Kaydınız Alındı!</h2>
+            <p>Çekiliş katılımınız başarıyla sisteme kaydedilmiştir. Instagram hesabımızı takip etmeyi unutmayın.</p>
+            <button class="btn btn-gold" style="margin-top: 25px;" onclick="closeModal()">Tamam</button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation
+        const mobBtn = document.getElementById('mobile-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        mobBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobBtn.querySelector('i').classList.toggle('fa-bars-staggered');
+            mobBtn.querySelector('i').classList.toggle('fa-xmark');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            mobBtn.querySelector('i').classList.add('fa-bars-staggered');
+            mobBtn.querySelector('i').classList.remove('fa-xmark');
+        }));
+
+        // Verse Rotation
+        const verses = [
+            { a: "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ...", t: "Ey iman edenler! Oruç sizden öncekilere farz kılındığı gibi size de farz kılındı.", r: "Bakara Suresi, 183" },
+            { a: "وَتَعَاوَنُوا۟ عَلَى ٱلْبِرِّ وَٱلتَّقْوَىٰ...", t: "İyilik ve takva üzere yardımlaşın.", r: "Maide Suresi, 2" },
+            { a: "شَهْرُ رَمَضَانَ ٱلَّذِيٓ أُنزِلَ فِيهِ ٱلْقُرْءَانُ...", t: "Ramazan ayı, içinde Kur'an'ın indirildiği aydır.", r: "Bakara Suresi, 185" }
+        ];
+
+        function changeVerse() {
+            const v = verses[Math.floor(Math.random() * verses.length)];
+            const box = document.querySelector('.verse-box');
+            box.style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('v-arabic').innerText = v.a;
+                document.getElementById('v-trans').innerText = `"${v.t}"`;
+                document.getElementById('v-ref').innerText = v.r;
+                box.style.opacity = '1';
+            }, 300);
+        }
+
+        // Gallery Loader
+        const imgs = [
+            "resimler/foto1.JPG",
+            "resimler/foto2.JPG",
+            "resimler/foto3.JPG",
+            "resimler/foto4.JPG"
+        ];
+        const track = document.getElementById('gallery-track');
+        imgs.forEach(url => {
+            track.innerHTML += `
+                <div class="gallery-slide">
+                    <img src="${url}">
+                    <div class="gallery-caption">
+                        <h3>Bereketin Adresi</h3>
+                        <p>Kardeşlik duygusunun pekiştiği o anlar.</p>
+                    </div>
+                </div>`;
+        });
+
+        let current = 0;
+        setInterval(() => {
+            current = (current + 1) % imgs.length;
+            track.style.transform = `translateX(-${current * 100}%)`;
+        }, 5000);
+
+        // Form Submission
+        document.getElementById('raffle-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('modal').style.display = 'flex';
+        });
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('raffle-form').reset();
+        }
+    </script>
+</body>
+</html>

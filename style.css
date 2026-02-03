@@ -1,0 +1,135 @@
+/* Renk Paleti */
+:root {
+    --midnight-blue: #0b132b;
+    --amber-gold: #d4af37;
+    --warm-sand: #f5e6c8;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--midnight-blue);
+    color: var(--warm-sand);
+    overflow-x: hidden;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background:
+        linear-gradient(to bottom, rgba(11,19,43,0.8), rgba(11,19,43,0.95)),
+        url("images/background.jpg") center/cover no-repeat;
+    position: relative;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 80px;
+}
+
+.logo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 32px;
+    background: linear-gradient(120deg, #f5d76e, #cfa32f, #f5d76e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.menu li {
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: var(--amber-gold);
+    cursor: pointer;
+    position: relative;
+}
+
+.menu li::after {
+    content: '';
+    width: 0%;
+    height: 1px;
+    background: var(--amber-gold);
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    transition: 0.3s;
+}
+
+.menu li:hover::after {
+    width: 100%;
+}
+
+/* HİLAL */
+.crescent {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.crescent img {
+    width: 90px;
+    filter: drop-shadow(0 0 25px rgba(212,175,55,0.6));
+}
+
+/* HERO CONTENT */
+.hero-content {
+    height: calc(100vh - 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.slogan {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 64px;
+    line-height: 1.2;
+    background: linear-gradient(120deg, #fff1a8, #d4af37, #fff1a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 40px rgba(212,175,55,0.35);
+}
+
+.subtitle {
+    margin-top: 25px;
+    font-size: 18px;
+    color: var(--warm-sand);
+    opacity: 0.85;
+}
+
+/* GEOMETRİK DESENLER */
+.pattern {
+    position: absolute;
+    top: 0;
+    width: 180px;
+    height: 100vh;
+    background-image: url("images/islamic-pattern.png");
+    background-repeat: repeat;
+    opacity: 0.05;
+}
+
+.pattern.left {
+    left: 0;
+}
+
+.pattern.right {
+    right: 0;
+    transform: scaleX(-1);
+}
