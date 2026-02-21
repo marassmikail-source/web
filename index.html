@@ -103,15 +103,28 @@
         .reference { font-weight: 700; color: var(--accent); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; }
 
         /* --- Gallery Slider --- */
-        .gallery-wrapper { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); height: 500px; }
-        .gallery-track { display: flex; transition: transform 0.8s ease-in-out; height: 100%; }
-        .gallery-slide { min-width: 100%; position: relative; }
-        .gallery-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-wrapper { 
+            position: relative; 
+            overflow: hidden; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+            height: 600px; /* Görsellerin daha iyi görünmesi için yükseklik artırıldı */
+            background: #eee;
+        }
+        .gallery-track { display: flex; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); height: 100%; }
+        .gallery-slide { min-width: 100%; position: relative; height: 100%; }
+        .gallery-slide img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; /* Boşlukları kaldırır, resmi alana tam yayar */
+            object-position: center;
+        }
         .gallery-caption {
             position: absolute; bottom: 0; left: 0; right: 0;
             padding: 40px; background: linear-gradient(transparent, rgba(6, 78, 59, 0.9));
             color: var(--white); text-align: left;
         }
+        .gallery-caption h3 { font-size: 1.8rem; margin-bottom: 5px; }
 
         /* --- Raffle Card --- */
         .raffle-container {
@@ -163,7 +176,7 @@
 
         @media (max-width: 992px) {
             .raffle-container { grid-template-columns: 1fr; }
-            .gallery-wrapper { height: 350px; }
+            .gallery-wrapper { height: 450px; }
         }
 
         @media (max-width: 768px) {
@@ -225,7 +238,7 @@
         <div class="container">
             <h2 class="section-title">Günün Ayeti</h2>
             <div class="verse-box">
-                <div class="arabic" id="v-arabic">يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ كَمَا كُتِبَ عَلَى ٱلَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ</div>
+                <div class="arabic" id="v-arabic">يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ كَمَا كُtِبَ عَلَى ٱلَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ</div>
                 <div class="translation" id="v-trans">"Ey iman edenler! Oruç sizden öncekilere farz kılındığı gibi, Allah'a karşı gelmekten sakınasınız diye size de farz kılındı."</div>
                 <div class="reference" id="v-ref">Bakara Suresi, 183. Ayet</div>
                 <button class="btn" style="margin-top: 30px; font-size: 0.8rem; color: var(--accent);" onclick="changeVerse()">
@@ -238,7 +251,7 @@
     <!-- Gallery -->
     <section class="section-padding" id="gallery" style="background: #fdfcf7;">
         <div class="container text-center">
-            <h2 class="section-title">Soframızın Bereketi</h2>
+            <h2 class="section-title">İftardan Kareler</h2>
             <div class="gallery-wrapper">
                 <div class="gallery-track" id="gallery-track">
                     <!-- Slides loaded by JS -->
@@ -297,7 +310,7 @@
                     <p>@29mude_iftar</p>
                     <span style="color: var(--accent); font-size: 0.8rem; font-weight: 700;">Takip Et →</span>
                 </a>
-                <a href="https://x.com/29mude_iftar?s=21" target="_blank" class="contact-card">
+                <a href="https://www.instagram.com/29mude_iftar" target="_blank" class="contact-card">
                     <i class="fa-brands fa-x-twitter"></i>
                     <h3>X / Twitter</h3>
                     <p>@29mude_iftar</p>
@@ -329,23 +342,60 @@
     </div>
 
     <script>
-        // Mobile Navigation
-        const mobBtn = document.getElementById('mobile-toggle');
-        const navMenu = document.getElementById('nav-menu');
-        
-        mobBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobBtn.querySelector('i').classList.toggle('fa-bars-staggered');
-            mobBtn.querySelector('i').classList.toggle('fa-xmark');
+        window.addEventListener('DOMContentLoaded', () => {
+            const mobBtn = document.getElementById('mobile-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const track = document.getElementById('gallery-track');
+            
+            mobBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobBtn.querySelector('i').classList.toggle('fa-bars-staggered');
+                mobBtn.querySelector('i').classList.toggle('fa-xmark');
+            });
+
+            document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobBtn.querySelector('i').classList.add('fa-bars-staggered');
+                mobBtn.querySelector('i').classList.remove('fa-xmark');
+            }));
+
+            // Doğrudan Resim Linkleri
+            const imgs = [
+                "https://i.ibb.co/LzbqJQtd/foto1.jpg",
+                "https://i.ibb.co/cXCNfJkQ/foto2.jpg",
+                "https://i.ibb.co/XrfjPpw9/foto3.jpg",
+                "https://i.ibb.co/Psn6RLk1/foto4.jpg",
+                "https://i.ibb.co/3mnq78NB/foto5.jpg",
+                "https://i.ibb.co/nsBF1wVN/foto.jpg",
+                "https://i.ibb.co/dwjS98RC/foto7.jpg"
+            ];
+            
+            if (track) {
+                imgs.forEach((url, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'gallery-slide';
+                    slide.innerHTML = `
+                        <img src="${url}" alt="İftar Galeri ${index + 1}" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x800?text=Görsel+Yükleniyor...'">
+                        <div class="gallery-caption">
+                            <h3>Bereket ve Kardeşlik</h3>
+                            <p>29 Mayıs Üniversitesi İftar Sofrasından bir kare.</p>
+                        </div>
+                    `;
+                    track.appendChild(slide);
+                });
+
+                let current = 0;
+                const rotateImages = () => {
+                    if (imgs.length > 0) {
+                        current = (current + 1) % imgs.length;
+                        track.style.transform = `translateX(-${current * 100}%)`;
+                    }
+                };
+                
+                setInterval(rotateImages, 5000);
+            }
         });
 
-        document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            mobBtn.querySelector('i').classList.add('fa-bars-staggered');
-            mobBtn.querySelector('i').classList.remove('fa-xmark');
-        }));
-
-        // Verse Rotation
         const verses = [
             { a: "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ...", t: "Ey iman edenler! Oruç sizden öncekilere farz kılındığı gibi size de farz kılındı.", r: "Bakara Suresi, 183" },
             { a: "وَتَعَاوَنُوا۟ عَلَى ٱلْبِرِّ وَٱلتَّقْوَىٰ...", t: "İyilik ve takva üzere yardımlaşın.", r: "Maide Suresi, 2" },
@@ -355,46 +405,24 @@
         function changeVerse() {
             const v = verses[Math.floor(Math.random() * verses.length)];
             const box = document.querySelector('.verse-box');
-            box.style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('v-arabic').innerText = v.a;
-                document.getElementById('v-trans').innerText = `"${v.t}"`;
-                document.getElementById('v-ref').innerText = v.r;
-                box.style.opacity = '1';
-            }, 300);
+            if (box) {
+                box.style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('v-arabic').innerText = v.a;
+                    document.getElementById('v-trans').innerText = `"${v.t}"`;
+                    document.getElementById('v-ref').innerText = v.r;
+                    box.style.opacity = '1';
+                }, 300);
+            }
         }
 
-        // FOTOĞRAF LİNKLERİNİ BURAYA EKLEYİN:
-        // İnternete yüklediğiniz fotoğrafların "Doğrudan Bağlantı" (Direct Link) adreslerini 
-        // aşağıdaki tırnakların içine yapıştırın.
-        const imgs = [
-            "", // 1. Fotoğraf Linki
-            
-        ];
-        
-        const track = document.getElementById('gallery-track');
-        imgs.forEach((url, index) => {
-            track.innerHTML += `
-                <div class="gallery-slide">
-                    <img src="${url}" alt="İftar Galeri ${index + 1}" onerror="this.src='https://via.placeholder.com/1200x500?text=Resim+Yuklenemedi'">
-                    <div class="gallery-caption">
-                        <h3>Bereketin Adresi</h3>
-                        <p>Kardeşlik duygusunun pekiştiği o anlar.</p>
-                    </div>
-                </div>`;
-        });
-
-        let current = 0;
-        setInterval(() => {
-            current = (current + 1) % imgs.length;
-            track.style.transform = `translateX(-${current * 100}%)`;
-        }, 5000);
-
-        // Form Submission
-        document.getElementById('raffle-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            document.getElementById('modal').style.display = 'flex';
-        });
+        const raffleForm = document.getElementById('raffle-form');
+        if (raffleForm) {
+            raffleForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                document.getElementById('modal').style.display = 'flex';
+            });
+        }
 
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
