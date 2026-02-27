@@ -68,7 +68,7 @@
             padding-top: 180px;
             padding-bottom: 120px;
             background: linear-gradient(rgba(253, 252, 247, 0.9), rgba(253, 252, 247, 0.9)), 
-                        url('https://res.cloudinary.com/dfme9gski/image/upload/v1771714252/foto7_iihnlh.jpg'); /* YENİ ARKA PLAN GÖRSELİ */
+                        url('https://res.cloudinary.com/dfme9gski/image/upload/v1771714252/foto7_iihnlh.jpg');
             background-size: cover;
             background-position: center;
             text-align: center;
@@ -85,7 +85,7 @@
         .btn-gold { background: var(--accent); color: var(--white); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
         .btn-gold:hover { background: var(--accent-dark); transform: translateY(-3px); }
 
-        /* --- Verse Section --- */
+        /* --- Hadith Section --- */
         .section-title { font-size: 2.5rem; color: var(--primary); margin-bottom: 40px; text-align: center; position: relative; }
         .section-title::after { content: '◈'; display: block; font-size: 1rem; color: var(--accent); margin-top: 10px; }
 
@@ -95,9 +95,13 @@
             text-align: center; max-width: 900px; margin: 0 auto;
             box-shadow: 0 15px 35px rgba(0,0,0,0.03);
             transition: opacity 0.3s ease;
+            min-height: 350px; /* Sabit yükseklik ile zıplama engellendi */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        .arabic { font-size: 2.2rem; color: var(--primary); margin-bottom: 25px; line-height: 1.8; }
-        .translation { font-style: italic; font-size: 1.15rem; color: var(--text-gray); margin-bottom: 15px; }
+        .hadith-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; opacity: 0.6; }
+        .translation { font-style: italic; font-size: 1.25rem; color: var(--text-dark); margin-bottom: 20px; font-weight: 500; }
         .reference { font-weight: 700; color: var(--accent); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; }
 
         /* --- Gallery Slider --- */
@@ -168,7 +172,6 @@
             .nav-menu.active { left: 0; }
             .hero { padding-top: 150px; }
             .section-title { font-size: 2rem; }
-            .arabic { font-size: 1.6rem; }
         }
 
         .section-padding { padding: 80px 0; }
@@ -191,7 +194,7 @@
             </div>
             <nav class="nav-menu" id="nav-menu">
                 <a href="#home" class="nav-link">Giriş</a>
-                <a href="#verse" class="nav-link">Günün Ayeti</a>
+                <a href="#hadith" class="nav-link">Günün Hadisi</a>
                 <a href="#gallery" class="nav-link">Galeri</a>
                 <a href="#raffle" class="nav-link">Çekiliş</a>
                 <a href="#contact" class="nav-link">İletişim</a>
@@ -210,15 +213,15 @@
         </div>
     </section>
 
-    <section class="section-padding bg-pattern" id="verse">
+    <section class="section-padding bg-pattern" id="hadith">
         <div class="container">
-            <h2 class="section-title">Günün Ayeti</h2>
-            <div class="verse-box">
-                <div class="arabic" id="v-arabic">يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ كَمَا كُتِبَ عَلَى ٱلَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ</div>
-                <div class="translation" id="v-trans">"Ey iman edenler! Oruç sizden öncekilere farz kılındığı gibi, Allah'a karşı gelmekten sakınasınız diye size de farz kılındı."</div>
-                <div class="reference" id="v-ref">Bakara Suresi, 183. Ayet</div>
-                <button class="btn" style="margin-top: 30px; font-size: 0.8rem; color: var(--accent);" onclick="changeVerse()">
-                    <i class="fas fa-sync-alt"></i> Farklı Bir Ayet
+            <h2 class="section-title">Günün Hadis-i Şerifleri</h2>
+            <div class="verse-box" id="hadith-box">
+                <div class="hadith-icon"><i class="fa-solid fa-quote-left"></i></div>
+                <div class="translation" id="h-text">“Güç yetirebileceğiniz amelleri yapmaya gayret ediniz. Allah usanmaz da siz usanırsınız. Allah katında amellerin en sevimlisi az da olsa devamlı olanıdır.”</div>
+                <div class="reference" id="h-ref">(Ebû Dâvûd, Tatavvu, 27)</div>
+                <button class="btn" style="margin-top: 30px; font-size: 0.8rem; color: var(--accent);" onclick="changeHadith()">
+                    <i class="fas fa-sync-alt"></i> Farklı Bir Hadis
                 </button>
             </div>
         </div>
@@ -228,8 +231,7 @@
         <div class="container text-center">
             <h2 class="section-title">İftardan Kareler</h2>
             <div class="gallery-wrapper">
-                <div class="gallery-track" id="gallery-track">
-                    </div>
+                <div class="gallery-track" id="gallery-track"></div>
             </div>
         </div>
     </section>
@@ -302,6 +304,10 @@
 
     <script async src="https://tally.so/widgets/embed.js"></script>
     <script>
+        // Sayfa Kayma Engelleme (Scroll fix)
+        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+        window.scrollTo(0, 0);
+
         window.addEventListener('DOMContentLoaded', () => {
             const mobBtn = document.getElementById('mobile-toggle');
             const navMenu = document.getElementById('nav-menu');
@@ -353,25 +359,33 @@
             }
         });
 
-        const verses = [
-            { a: "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ...", t: "Ey iman edenler! Oruç sizden öncekilere farz kılındığı gibi size de farz kılındı.", r: "Bakara Suresi, 183" },
-            { a: "وَتَعَاوَنُوا۟ عَلَى ٱلْبِرِّ وَٱلتَّقْوَىٰ...", t: "İyilik ve takva üzere yardımlaşın.", r: "Maide Suresi, 2" },
-            { a: "شَهْرُ رَمَضَانَ ٱلَّذِيٓ أُنزِلَ فِيهِ ٱلْقُرْءَانُ...", t: "Ramazan ayı, içinde Kur'an'ın indirildiği aydır.", r: "Bakara Suresi, 185" }
+        // HADİS VERİLERİ
+        const hadiths = [
+            { t: "“Güç yetirebileceğiniz amelleri yapmaya gayret ediniz. Allah usanmaz da siz usanırsınız. Allah katında amellerin en sevimlisi az da olsa devamlı olanıdır.”", r: "(Ebû Dâvûd, Tatavvu, 27)" },
+            { t: "“Allah Teâlâ katında duadan daha kıymetli bir şey yoktur.”", r: "(Tirmizî, Deavât, 1; İbn Mâce, Dua, 1)" },
+            { t: "“Vücuttaki bütün eklemler için her gün sadaka vermek gerekir. Bineğine binmek isteyen kişiye yardım etmek veya eşyasını bineğine yüklemek sadakadır. Güzel söz ve namaza giderken atılan her adım sadakadır. Yol göstermek sadakadır.”", r: "(Buhârî, Cihâd, 72)" },
+            { t: "“Dinin başı İslâm (kelime-i şehâdet getirerek Allah'a teslim olmak), direği ise namazdır.”", r: "(Tirmizî, Îmân, 8; İbn Hanbel, V, 231)" },
+            { t: "“Güneşin doğduğu en hayırlı gün, Cuma günüdür. Âdem o gün yaratıldı, o gün cennete konuldu ve o gün cennetten çıkarıldı. Kıyamet de ancak Cuma günü kopacaktır.”", r: "(Müslim, Cum'a, 18)" },
+            { t: "“Mümin cana yakındır. (İnsanlarla) yakınlık kurmayan ve kendisiyle yakınlık kurulamayan kimsede hayır yoktur.”", r: "(İbn Hanbel, II, 400)" },
+            { t: "“İman etmedikçe cennete giremezsiniz, birbirinizi sevmedikçe de iman etmiş olmazsınız. Size, yaptığınız takdirde birbirinizi seveceğiniz bir iş göstereyim mi? Aranızda selâmı yayın.”", r: "(Müslim, Îmân, 93)" },
+            { t: "“...Mücahid, Allah'a itaat yolunda nefsi ile cihad edendir...”", r: "(İbn Hanbel, VI, 22)" }
         ];
 
-        function changeVerse() {
-            const v = verses[Math.floor(Math.random() * verses.length)];
-            const box = document.querySelector('.verse-box');
+        function changeHadith() {
+            const h = hadiths[Math.floor(Math.random() * hadiths.length)];
+            const box = document.getElementById('hadith-box');
             if (box) {
                 box.style.opacity = '0';
                 setTimeout(() => {
-                    document.getElementById('v-arabic').innerText = v.a;
-                    document.getElementById('v-trans').innerText = `"${v.t}"`;
-                    document.getElementById('v-ref').innerText = v.r;
+                    document.getElementById('h-text').innerText = h.t;
+                    document.getElementById('h-ref').innerText = h.r;
                     box.style.opacity = '1';
                 }, 300);
             }
         }
+        
+        // İlk yüklemede fonksiyon ismini ayet yerine hadis olarak güncelleyelim
+        window.changeVerse = changeHadith; 
     </script>
 </body>
 </html>
