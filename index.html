@@ -95,7 +95,7 @@
             text-align: center; max-width: 900px; margin: 0 auto;
             box-shadow: 0 15px 35px rgba(0,0,0,0.03);
             transition: opacity 0.3s ease;
-            min-height: 350px; /* Sabit yükseklik ile zıplama engellendi */
+            min-height: 350px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -136,10 +136,19 @@
         }
         .raffle-info { text-align: left; }
         .ig-highlight {
-            background: #fff5f5; border-radius: 15px; padding: 25px;
-            border-left: 5px solid #E1306C; margin: 20px 0;
+            background: #fdfbf0; border-radius: 15px; padding: 25px;
+            border-left: 5px solid var(--accent); margin: 20px 0;
         }
         .ig-highlight a { color: #E1306C; text-decoration: none; font-weight: 700; font-size: 1.2rem; }
+        
+        .gift-list { list-style: none; margin-top: 15px; }
+        .gift-list li { 
+            padding: 8px 0; border-bottom: 1px dashed #eee; 
+            font-size: 0.95rem; color: var(--text-dark);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .gift-list li i { color: var(--accent); font-size: 0.8rem; }
+        .gift-list li:last-child { border-bottom: none; }
 
         /* --- Contact Grid --- */
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
@@ -242,11 +251,26 @@
             <div class="raffle-container">
                 <div class="raffle-info">
                     <h3>Hediye Kazanma Şansı!</h3>
-                    <p style="margin: 15px 0;">Bu yılki iftarımızda çeşitli sürpriz hediyeler dağıtıyoruz. Çekilişe katılmak için formu doldurmayı unutmayın!</p>
+                    <p style="margin: 10px 0; font-size: 0.95rem;">İftarımıza özel hazırladığımız çekilişimize katılarak aşağıdaki kıymetli hediyelerden birine sahip olabilirsiniz:</p>
+                    
+                    <ul class="gift-list">
+                        <li><i class="fas fa-star"></i> <b>1. Umre</b></li>
+                        <li><i class="fas fa-star"></i> <b>2. Gram Altın</b></li>
+                        <li><i class="fas fa-star"></i> <b>3. Hat Tablosu</b></li>
+                        <li><i class="fas fa-book"></i> 4. İslam Tarihi - M. Asım Köksal</li>
+                        <li><i class="fas fa-book"></i> 5. Hayatü’s Sahabe - M. Yusuf El Kandehlevi</li>
+                        <li><i class="fas fa-book"></i> 6. Mukaddime - İbn Haldun</li>
+                        <li><i class="fas fa-book"></i> 7. İslam Peygamberi - Muhammed Hamidullah</li>
+                        <li><i class="fas fa-book"></i> 8. Necip Fazıl Üçlemesi</li>
+                        <li><i class="fas fa-book"></i> 9. Muhammed Emin Yıldırım Üçlemesi</li>
+                        <li><i class="fas fa-book"></i> 10. Mustafa Kutlu Üçlemesi</li>
+                    </ul>
+
                     <div class="ig-highlight">
-                        <p>1. Hesabımızı Takip Et:</p>
-                        <a href="https://www.instagram.com/29mude_iftar" target="_blank">@29mude_iftar</a>
-                        <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-gray);">2. Etkinlikten bir kareyi bizi etiketleyerek hikayende paylaş!</p>
+                        <p style="font-weight: 700; color: var(--primary); margin-bottom: 10px;">Çekiliş Katılım Şartları:</p>
+                        <p style="font-size: 0.9rem;">1. Hesabımızı takip et: <a href="https://www.instagram.com/29mude_iftar" target="_blank">@29mude_iftar</a></p>
+                        <p style="font-size: 0.9rem; margin-top: 5px;">2. Paylaşılan son gönderiyi beğen.</p>
+                        <p style="font-size: 0.9rem; margin-top: 5px;">3. Gönderiyi hikayende (story) bizi etiketleyerek paylaş.</p>
                     </div>
                 </div>
                 
@@ -255,7 +279,7 @@
                         data-tally-src="https://tally.so/embed/BzXgkA?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
                         loading="lazy" 
                         width="100%" 
-                        height="500" 
+                        height="600" 
                         frameborder="0" 
                         marginheight="0" 
                         marginwidth="0" 
@@ -304,7 +328,6 @@
 
     <script async src="https://tally.so/widgets/embed.js"></script>
     <script>
-        // Sayfa Kayma Engelleme (Scroll fix)
         if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
         window.scrollTo(0, 0);
 
@@ -349,26 +372,18 @@
                 });
 
                 let current = 0;
-                const rotateImages = () => {
+                setInterval(() => {
                     if (imgs.length > 0) {
                         current = (current + 1) % imgs.length;
                         track.style.transform = `translateX(-${current * 100}%)`;
                     }
-                };
-                setInterval(rotateImages, 5000);
+                }, 5000);
             }
         });
 
-        // HADİS VERİLERİ
         const hadiths = [
             { t: "“Güç yetirebileceğiniz amelleri yapmaya gayret ediniz. Allah usanmaz da siz usanırsınız. Allah katında amellerin en sevimlisi az da olsa devamlı olanıdır.”", r: "(Ebû Dâvûd, Tatavvu, 27)" },
-            { t: "“Allah Teâlâ katında duadan daha kıymetli bir şey yoktur.”", r: "(Tirmizî, Deavât, 1; İbn Mâce, Dua, 1)" },
-            { t: "“Vücuttaki bütün eklemler için her gün sadaka vermek gerekir. Bineğine binmek isteyen kişiye yardım etmek veya eşyasını bineğine yüklemek sadakadır. Güzel söz ve namaza giderken atılan her adım sadakadır. Yol göstermek sadakadır.”", r: "(Buhârî, Cihâd, 72)" },
-            { t: "“Dinin başı İslâm (kelime-i şehâdet getirerek Allah'a teslim olmak), direği ise namazdır.”", r: "(Tirmizî, Îmân, 8; İbn Hanbel, V, 231)" },
-            { t: "“Güneşin doğduğu en hayırlı gün, Cuma günüdür. Âdem o gün yaratıldı, o gün cennete konuldu ve o gün cennetten çıkarıldı. Kıyamet de ancak Cuma günü kopacaktır.”", r: "(Müslim, Cum'a, 18)" },
-            { t: "“Mümin cana yakındır. (İnsanlarla) yakınlık kurmayan ve kendisiyle yakınlık kurulamayan kimsede hayır yoktur.”", r: "(İbn Hanbel, II, 400)" },
-            { t: "“İman etmedikçe cennete giremezsiniz, birbirinizi sevmedikçe de iman etmiş olmazsınız. Size, yaptığınız takdirde birbirinizi seveceğiniz bir iş göstereyim mi? Aranızda selâmı yayın.”", r: "(Müslim, Îmân, 93)" },
-            { t: "“...Mücahid, Allah'a itaat yolunda nefsi ile cihad edendir...”", r: "(İbn Hanbel, VI, 22)" }
+            { t: "“İman etmedikçe cennete giremezsiniz, birbirinizi sevmedikçe de iman etmiş olmazsınız. Size, yaptığınız takdirde birbirinizi seveceğiniz bir iş göstereyim mi? Aranızda selâmı yayın.”", r: "(Müslim, Îmân, 93)" }
         ];
 
         function changeHadith() {
@@ -383,9 +398,6 @@
                 }, 300);
             }
         }
-        
-        // İlk yüklemede fonksiyon ismini ayet yerine hadis olarak güncelleyelim
-        window.changeVerse = changeHadith; 
     </script>
 </body>
 </html>
